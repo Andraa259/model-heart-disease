@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediksi Risiko Penyakit Jantung</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px;
+            width: 100%;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            border-radius: 5px;
+        }
+        .error {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8d7da;
+            border-left: 5px solid #dc3545;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prediksi Risiko Penyakit Jantung</h1>
+        <form action="/predict" method="post">
+            <label>BMI</label>
+            <input type="number" step="0.1" name="BMI" required>
+
+            <label>Smoking</label>
+            <select name="Smoking">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label>Alcohol Drinking</label>
+            <select name="AlcoholDrinking">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label>Stroke</label>
+            <select name="Stroke">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label>Physical Health (hari tidak sehat dalam 30 hari)</label>
+            <input type="number" name="PhysicalHealth" min="0" max="30" required>
+
+            <label>Mental Health (hari tidak sehat dalam 30 hari)</label>
+            <input type="number" name="MentalHealth" min="0" max="30" required>
+
+            <label>Difficulty Walking</label>
+            <select name="DiffWalking">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label>Sex</label>
+            <select name="Sex">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <label>Age Category</label>
+            <select name="AgeCategory">
+                <option value="18-24">18-24</option>
+                <option value="25-29">25-29</option>
+                <option value="30-34">30-34</option>
+                <option value="35-39">35-39</option>
+                <option value="40-44">40-44</option>
+                <option value="45-49">45-49</option>
+                <option value="50-54">50-54</option>
+                <option value="55-59">55-59</option>
+                <option value="60-64">60-64</option>
+                <option value="65-69">65-69</option>
+                <option value="70-74">70-74</option>
+                <option value="75-79">75-79</option>
+                <option value="80 or older">80 or older</option>
+            </select>
+
+            <label>Diabetic</label>
+            <select name="Diabetic">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="No, borderline diabetes">No, borderline diabetes</option>
+                <option value="Yes (during pregnancy)">Yes (during pregnancy)</option>
+            </select>
+
+            <label>Physical Activity</label>
+            <select name="PhysicalActivity">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label>General Health</label>
+            <select name="GenHealth">
+                <option value="Excellent">Excellent</option>
+                <option value="Very good">Very good</option>
+                <option value="Good">Good</option>
+                <option value="Fair">Fair</option>
+                <option value="Poor">Poor</option>
+            </select>
+
+            <label>Sleep Time (jam)</label>
+            <input type="number" step="0.1" name="SleepTime" required>
+
+            <label>Asthma</label>
+            <select name="Asthma">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label>Kidney Disease</label>
+            <select name="KidneyDisease">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label>Skin Cancer</label>
+            <select name="SkinCancer">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <button type="submit">Prediksi</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            <h3>Hasil Prediksi</h3>
+            <p>Risiko Penyakit Jantung: <strong>{{ prediction }}</strong></p>
+            <p>Probabilitas: <strong>{{ probability }}</strong></p>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">
+            <p>Error: {{ error }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

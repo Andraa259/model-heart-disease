@@ -8,7 +8,7 @@ app = Flask(__name__, template_folder='../templates', static_folder='../static')
 
 # Path ke model dan file pendukung
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, '..', 'DeepResNet_HeartDisease.h5')
+MODEL_PATH = os.path.join(BASE_DIR, '..', 'model.h5')
 SCALER_PATH = os.path.join(BASE_DIR, '..', 'scaler.pkl')
 ENCODER_PATH = os.path.join(BASE_DIR, '..', 'label_encoders.pkl')
 
